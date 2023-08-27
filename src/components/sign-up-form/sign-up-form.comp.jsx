@@ -1,11 +1,11 @@
-import './sign-up-form.styles.scss'
+import "./sign-up-form.styles.scss";
 import React, { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 import CustomInput from "../custom-input/custom-input.comp";
-import CustomButton from '../custom-button/custom-button.comp';
+import CustomButton from "../custom-button/custom-button.comp";
 
 const SignUpForm = () => {
   const defaultDataModel = {
@@ -29,9 +29,16 @@ const SignUpForm = () => {
     e.preventDefault();
     if (password !== confirmPassword) return;
 
-    const { user } = await createAuthUserWithEmailAndPassword(email, password);
-    await createUserDocumentFromAuth(user, { displayName: name });
-    setFormValues(defaultDataModel);
+    try {
+      const { user } = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      await createUserDocumentFromAuth(user, { displayName: name });
+      setFormValues(defaultDataModel);
+    } catch (error) {
+      console.log("Error signing up", error.code);
+    }
   };
 
   return (
@@ -68,7 +75,7 @@ const SignUpForm = () => {
           required
         />
 
-        <CustomButton type='submit'>Sign Up</CustomButton>
+        <CustomButton type="submit">Sign Up</CustomButton>
       </form>
     </div>
   );

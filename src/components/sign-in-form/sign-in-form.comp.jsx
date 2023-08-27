@@ -2,7 +2,6 @@ import "./sign-in-form.styles.scss";
 import React, { useEffect, useState } from "react";
 import {
   auth,
-  createUserDocumentFromAuth,
   signInUserWithEmailAndPassword,
   signInWithGoogleRedirect,
 } from "../../utils/firebase/firebase.utils";
@@ -24,20 +23,23 @@ const SignInForm = () => {
     });
   };
 
+  const clearFormFields = () => {
+    setFormValues({ email: "", password: "" });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await signInUserWithEmailAndPassword(email, password);
-    if (result) {
-      setFormValues({ email: "", password: "" });
+    try {
+      await signInUserWithEmailAndPassword(email, password);
+      clearFormFields();
+    } catch (error) {
+      console.log("Error signing in", error.code);
     }
   };
 
   const fetchRedirect = async () => {
-    const response = await getRedirectResult(auth);
-    if (response) {
-      await createUserDocumentFromAuth(response.user);
-    }
+    await getRedirectResult(auth);
   };
 
   useEffect(() => {
