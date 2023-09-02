@@ -4,18 +4,11 @@ import CustomButton from "../custom-button/custom-button.comp";
 import "./product-card.styles.scss";
 
 const ProductCard = ({ product }) => {
-  const { items, setItems } = useContext(CartContext);
+  const { addItemToCart } = useContext(CartContext);
 
-  const addToCartHandler = () => {
-    const itemExists = items.find((item) => item.id === product.id);
-    if (!itemExists) {
-      setItems([...items, { ...product, count: 1 }]);
-      return;
-    }
-
-    const filteredItems = items.filter(item => item.id !== product.id)
-    setItems([{ ...product, count: itemExists.count + 1 }, ...filteredItems])
-};
+  const addItemToCartHandler = () => {
+    addItemToCart(product);
+  };
 
   return (
     <div className="product-card-container">
@@ -24,7 +17,7 @@ const ProductCard = ({ product }) => {
         <span className="name">{product.name}</span>
         <span className="price">{product.price}</span>
       </div>
-      <CustomButton onClick={addToCartHandler} buttonType="inverted">
+      <CustomButton onClick={addItemToCartHandler} buttonType="inverted">
         Add To Cart
       </CustomButton>
     </div>

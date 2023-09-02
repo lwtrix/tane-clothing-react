@@ -1,0 +1,21 @@
+.checkout-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 82px;
+
+  .checkout-header {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid black;
+
+    span {
+      width: 136px;
+      text-align: center;
+    }
+  }
+}
