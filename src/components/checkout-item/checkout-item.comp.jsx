@@ -37,7 +37,7 @@ const CheckoutItem = ({ item }) => {
           )} />
         </span>
       </div>
-      <span className="row-cell">£{item.price}</span>
+      <span className="row-cell">£{item.price * item.count}</span>
       <span className="row-cell">
         <BsTrash3 className="trash-icon" onClick={removeItemFromCartHandler} />
       </span>
