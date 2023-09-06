@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CheckoutItem from "../../components/checkout-item/checkout-item.comp";
+import CustomButton from "../../components/custom-button/custom-button.comp";
 import { CartContext } from "../../context/cart.context";
 import "./checkout.styles.scss";
 
 const Checkout = () => {
   const { items } = useContext(CartContext);
   const [checkoutTotal, setTotalCheckout] = useState(0);
+  const navigate = useNavigate()
 
   useEffect(() => {
     setTotalCheckout(
@@ -16,25 +19,33 @@ const Checkout = () => {
     );
   }, [items]);
 
-
   return (
     <div className="checkout-container">
-      { items.length ? <div className="checkout-grid">
-        <div className="checkout-header">
-          <span className="column-name">Product</span>
-          <span className="column-name">Description</span>
-          <span className="column-name">Quantity</span>
-          <span className="column-name">Price</span>
-          <span className="column-name">Remove</span>
+      {items.length ? (
+        <div className="checkout-grid">
+          <div className="checkout-header">
+            <span className="column-name">Product</span>
+            <span className="column-name">Description</span>
+            <span className="column-name">Quantity</span>
+            <span className="column-name">Price</span>
+            <span className="column-name">Remove</span>
+          </div>
+          {items.map((item) => (
+            <CheckoutItem item={item} key={item.id} />
+          ))}
+          <div className="checkout-total">
+            <span className="text">Total:</span>
+            <span className="total">£{checkoutTotal}</span>
+          </div>
         </div>
-        {items.map((item) => (
-          <CheckoutItem item={item} key={item.id} />
-        ))}
-        <div className="checkout-total">
-          <span className="text">Total:</span>
-          <span className="total">£{checkoutTotal}</span>
+      ) : (
+        <div className="empty-checkout-container">
+          <div className="empty-message">NOTHING HERE YET..</div>
+          <CustomButton onClick={() => {
+            navigate('/')
+          }}>BACK TO BROWSING</CustomButton>
         </div>
-      </div> : <span>Your cart is currently empty</span>}
+      )}
     </div>
   );
 };

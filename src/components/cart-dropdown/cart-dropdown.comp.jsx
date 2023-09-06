@@ -18,7 +18,7 @@ const CartDropdown = () => {
           ))}
         </div>
       ) : (
-        <span className="empty-message">NOTHING HERE YET..</span>
+        <span className="empty-message">Your cart is currently empty</span>
       )}
       <CustomButton onClick={() => navigate("/checkout")}>
         GO TO CHECKOUT
