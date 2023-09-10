@@ -1,0 +1,19 @@
+.shop-category-container {
+    display: flex;
+    flex-direction: column;
+
+    .category-name {
+        font-size: 28px;
+        margin: 0;
+        margin-bottom: 32px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }    
+
+    .category-products-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px;
+        row-gap: 48px;
+    }
+}

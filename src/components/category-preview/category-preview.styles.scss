@@ -1,0 +1,22 @@
+.category-preview-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 52px;
+
+  .name-container {
+    margin: 0;
+    margin-bottom: 32px;
+
+    .name {
+      font-size: 28px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+  }
+
+  .preview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 20px;
+  }
+}

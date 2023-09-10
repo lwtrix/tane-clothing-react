@@ -1,3 +1,6 @@
+$row-width: 780px;
+$columns-number: 5;
+
 .checkout-container {
   .empty-checkout-container {
     display: flex;
@@ -30,24 +33,25 @@
   .checkout-header {
     font-size: 18px;
     display: flex;
-    justify-content: center;
+    min-width: $row-width;
+    justify-content: space-between;
     padding-bottom: 24px;
     margin-bottom: 28px;
     border-bottom: 1px solid black;
 
-    span {
-      width: 136px;
+    .column-name {
       text-align: center;
+      width: $row-width / $columns-number;
     }
   }
 
   .checkout-total {
-    width: 90%;
+    width: 1.08 * $row-width;
     border-top: 1px solid black;
     padding-top: 24px;
     margin-top: 28px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     font-size: 32px;
     font-weight: 300;
 

@@ -8,7 +8,7 @@ import "./checkout.styles.scss";
 const Checkout = () => {
   const { items } = useContext(CartContext);
   const [checkoutTotal, setTotalCheckout] = useState(0);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTotalCheckout(
@@ -34,16 +34,25 @@ const Checkout = () => {
             <CheckoutItem item={item} key={item.id} />
           ))}
           <div className="checkout-total">
-            <span className="text">Total:</span>
-            <span className="total">£{checkoutTotal}</span>
+            <CustomButton onClick={() => {
+              navigate('/shop')
+            }}>Keep Shopping</CustomButton>
+            <div>
+              <span className="text">Total:</span>
+              <span className="total">£{checkoutTotal}</span>
+            </div>
           </div>
         </div>
       ) : (
         <div className="empty-checkout-container">
           <div className="empty-message">NOTHING HERE YET..</div>
-          <CustomButton onClick={() => {
-            navigate('/')
-          }}>BACK TO BROWSING</CustomButton>
+          <CustomButton
+            onClick={() => {
+              navigate("/shop");
+            }}
+          >
+            BACK TO BROWSING
+          </CustomButton>
         </div>
       )}
     </div>

@@ -6,17 +6,17 @@ import {
 } from "../utils/firebase/firebase.utils.js";
 
 export const ProductsContext = createContext({
-  products: [],
+  products: {},
 });
 
 export const ProductsProvider = ({ children }) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState({});
   const value = { products };
 
   useEffect(() => {
     const fetchCategoriesAndDocs = async () => {
-      const response = await getCategoriesAndDocs();
-      console.log(response);
+      const categoriesData = await getCategoriesAndDocs();
+      setProducts(categoriesData)
     };
     fetchCategoriesAndDocs();
   }, []);
